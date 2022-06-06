@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-const db = require("./db/connection");
+const connection = require("./db/connection");
 
 db.connect((err) => {
   if (err) throw err;
@@ -22,34 +22,15 @@ function employeeTracker() {
           "Add a role",
           "Add an employee",
           "Update an employees role",
-          "Exit prompt?",
-        ],
-      },
+          "Exit prompt.",
+        ]
+      }
     ])
     .then((response) => {
-      switch (response.option) {
-        case "View all departments":
-          selectAllDepartments();
-          break;
-        case "View all roles":
-          selectAllRoles();
-          break;
-        case "View all employees":
-          selectAllEmployees();
-          break;
-        case "Add a department":
-          addDepartment();
-          break;
-        case "Add a role":
-          addRole();
-          break;
-        case "Add an employee":
-          addEmployee();
-          break;
-        case "Update an employees role":
-          updateEmployeeRole();
-          break;
-      }
-    });
-};
-
+                if (response.prompt === 'View all departments') {
+                    connection.query(`SELECT * FROM department`, (err, result) => {
+                        if (err) throw err;
+                        console.log("Currently viewing all departments: ");
+                        console.table(res);
+                        employeeTracker();
+                    });
