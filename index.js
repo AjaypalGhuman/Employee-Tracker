@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const db = require("./db/connection");
 const table = require("console.table");
 
+// creates a success message when initally connected to the database
 db.connect((err) => {
   if (err) throw err;
   console.log("Database connected.");
@@ -54,6 +55,7 @@ function employeeTracker() {
     });
 }
 
+// gets all the current department data 
 const selectAllDepartments = () => {
   let query = "SELECT * FROM department";
 
@@ -65,6 +67,7 @@ const selectAllDepartments = () => {
   });
 };
 
+// gets all the current role data 
 const selectAllRoles = () => {
   let query = "SELECT * FROM role";
 
@@ -76,6 +79,7 @@ const selectAllRoles = () => {
   });
 };
 
+// gets all the current employee data
 const selectAllEmployees = () => {
   let query = "SELECT * FROM employee";
 
@@ -87,6 +91,7 @@ const selectAllEmployees = () => {
   });
 };
 
+// function created to add a new department
 const addDepartment = () => {
   inquirer
     .prompt({
@@ -108,6 +113,7 @@ const addDepartment = () => {
     });
 };
 
+// created function to add a new role 
 const addRole = () => {
   inquirer
     .prompt([
@@ -141,6 +147,7 @@ const addRole = () => {
     });
 };
 
+// function to create/add a new employee
 const addEmployee = () => {
   inquirer
     .prompt([
@@ -179,6 +186,7 @@ const addEmployee = () => {
     });
 };
 
+// this function allows one to updated an employees role by id
 const updateEmployeeRole = () => {
   inquirer
     .prompt([
