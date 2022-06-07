@@ -1,7 +1,8 @@
 const inquirer = require("inquirer");
-const connection = require("./db/connection");
+const db = require("./db/connection");
+const table = require("console.table");
 
-connection.connect((err) => {
+db.connect((err) => {
   if (err) throw err;
   console.log("Database connected.");
   employeeTracker();
@@ -20,9 +21,32 @@ function employeeTracker() {
         "Add a department",
         "Add a role",
         "Add an employee",
-        "Update an employees role",
-        "Exit prompt.",
+        "Update an employees role"
       ],
     },
-  ]);
-}
+  ]).then((response) => {
+    switch (response.option) {
+      case "View all departments":
+        selectAllDepartments();
+        break;
+      case "View all roles":
+        selectAllRoles();
+        break;
+      case "View all employees":
+        selectAllEmployees();
+        break;
+      case "Add a department":
+        addDepartment();
+        break;
+      case "Add a role":
+        addRole();
+        break;
+      case "Add an employee":
+        addEmployee();
+        break;
+      case "Update an employees role":
+        updateEmployeeRole();
+        break;
+    }
+  });
+};
