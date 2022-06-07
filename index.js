@@ -50,3 +50,54 @@ function employeeTracker() {
     }
   });
 };
+
+// Fetches all the data of Departments
+function selectAllDepartments () {
+  const sql = `SELECT * FROM department`;
+
+  db.promise().query(sql)
+  .then(([rows,fields]) => {
+      (console.table(rows))
+      employeeTracker();
+  })
+};
+
+//Fetches all the employee roles
+function selectAllRoles () {
+  const sql = `SELECT role.title AS Title, role.salary AS salary, departments.name AS Departments 
+  FROM role JOIN departments ON role.department_id = departments.id`;
+
+// creating a promise with a then statement
+  db.promise().query(sql)
+  .then(([rows,fields]) => {
+      (console.table(rows))
+      employeeTracker();
+  })
+};
+
+//fetches all the individual employees
+function selectAllEmployees () {
+  const sql = `SELECT * FROM employee`;
+
+  db.promise().query(sql)
+  .then(([rows,fields]) => {
+      (console.table(rows))
+      employeeTracker();
+  })
+};
+
+// adds a department
+function addDepartment () {
+  inquirer
+  .prompt({
+      type:'input',
+      name: 'department',
+      message:'Whats the name of the department you would like to add',
+  }).then((answer) => {
+      const sql = `INSERT INTO departments (name) VALUES (?)`
+      const params = [answer.department]
+      db.promise().query(sql, params)
+      console.log(`Department has been added to the database`);
+      employeeTracker();
+  })
+}
