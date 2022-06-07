@@ -10,7 +10,7 @@ db.connect((err) => {
 });
 
 // initial prompt
-function employeeTracker() {
+const employeeTracker = () => {
   inquirer
     .prompt([
       {
@@ -53,9 +53,9 @@ function employeeTracker() {
           break;
       }
     });
-}
+};
 
-// gets all the current department data 
+// gets all the current department data
 const selectAllDepartments = () => {
   let query = "SELECT * FROM department";
 
@@ -67,7 +67,7 @@ const selectAllDepartments = () => {
   });
 };
 
-// gets all the current role data 
+// gets all the current role data
 const selectAllRoles = () => {
   let query = "SELECT * FROM role";
 
@@ -113,7 +113,7 @@ const addDepartment = () => {
     });
 };
 
-// created function to add a new role 
+// created function to add a new role
 const addRole = () => {
   inquirer
     .prompt([
